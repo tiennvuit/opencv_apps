@@ -1,4 +1,4 @@
-- Function name: capitalize from the second letter.
+- Function name: Just capitalize the first letter.
 
 - Variable name:
 	+ Const Variable: full capitalization.
@@ -14,6 +14,6 @@
 	+ Example use funtion.
 
 - The convention funtion example:
-	def cartoonizing(image, kernel=default_kernel, *arg):
+	def Cartoonizing(image, kernel=default_kernel, *arg):
 		.....
 		.....
