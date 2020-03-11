@@ -10,5 +10,10 @@
 	+ List of parameters
 		+ Its data type
 		+ The meaning of that parameter
-	+ Return value.
-	+ Example.
+	+ Return value: type, meaning,...
+	+ Example use funtion.
+
+- The convention funtion example:
+	def cartoonizing(image, kernel=default_kernel, *arg):
+		.....
+		.....
