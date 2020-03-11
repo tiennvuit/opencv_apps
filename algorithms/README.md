@@ -1,1 +1,1 @@
-"# Source code of algorithms OpenCV" 
+# Source code of algorithms OpenCV
