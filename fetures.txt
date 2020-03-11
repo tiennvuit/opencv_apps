@@ -1,0 +1,56 @@
+Source: https://github.com/PacktPublishing/OpenCV-3-x-with-Python-By-Example
+
+1: Applying Geometric Transformations to Images
+	- 
+	- 
+	- ...
+
+2: Detecting Edges and Applying Image Filters
+	- 
+	- 
+	- ...
+
+3: Cartoonizing an Image
+	- 
+	- 
+	- ...
+
+4: Detecting and Tracking Different Body Parts
+	- 
+	- 
+	- ...
+
+5: Extracting Features from an Image
+	- 
+	- 
+	- ...
+
+6: Seam Carving
+	- 
+	- 
+	- ...
+
+7: Detecting Shapes and Segmenting an Image
+	- 
+	- 
+	- ...
+
+8: Object Tracking
+	- 
+	- 
+	- ...
+
+9: Object Recognition
+	- 
+	- 
+	- ...
+
+10: Augmented Reality
+	- 
+	- 
+	- ...
+
+11: Machine Learning by an Artificial Neural Network
+	- 
+	- 
+	- ...

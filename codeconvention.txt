@@ -1,0 +1,15 @@
+- Tên hàm: viết hoa chữ cái đầu
+- Tên biến: 
+	+ const: viết hoa hoàn toàn.
+	+ bình thường: viết thường.
+
+- Docstring:
+	+ Ngày dev.
+	+ Người dev
+	+ Danh sách tham số
+		+ Kiểu dữ liệu của nó.
+		+ Ý nghĩa của tham số đó
+	+ Giá trị trả về.
+	+ Example.
+
+- Chạy được mới upload lên git.
