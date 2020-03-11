@@ -1,4 +1,4 @@
-- Function name: capitalize first letter.
+- Function name: capitalize from the second letter.
 
 - Variable name:
 	+ Const Variable: full capitalization.
