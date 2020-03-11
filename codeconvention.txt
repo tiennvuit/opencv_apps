@@ -1,15 +1,14 @@
-- Tên hàm: viết hoa chữ cái đầu
-- Tên biến: 
-	+ const: viết hoa hoàn toàn.
-	+ bình thường: viết thường.
+- Function name: capitalize first letter.
 
-- Docstring:
-	+ Ngày dev.
-	+ Người dev
-	+ Danh sách tham số
-		+ Kiểu dữ liệu của nó.
-		+ Ý nghĩa của tham số đó
-	+ Giá trị trả về.
+- Variable name:
+	+ Const Variable: full capitalization.
+	+ Others: lowercase.
+
+- Docstring of funtion:
+	+ Date of dev.
+	+ The dev
+	+ List of parameters
+		+ Its data type
+		+ The meaning of that parameter
+	+ Return value.
 	+ Example.
-
-- Chạy được mới upload lên git.
