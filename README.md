@@ -1,1 +1,1 @@
-# opencv_apps
+OpenCV Apps.
