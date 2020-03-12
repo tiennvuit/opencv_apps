@@ -7,7 +7,7 @@ from defaults import *
 # Imort all functions we have
 from algorithm import Algorithm
 
-def process(image, name_algorithm: str, *arg):
+def process(image, name_algorithm: str, args):
     """
     @day: 11-03-2020
     @author: Tien Nguyen
@@ -24,13 +24,23 @@ def process(image, name_algorithm: str, *arg):
 
     if name_algorithm == 'Convolution2D':
         output = Algorithm.Convolution2D(image)
+    if name_algorithm == 'Bluring':
+        size_bluring = int(args.size_bluring)
+        output = Algorithm.Bluring(image=image, size=size_bluring)
+    if name_algorithm == 'Sharpening':
+        kernel_sharpen = str(args.kernel_sharpen)
+        output = Algorithm.Sharpening(image=image, selected_kernel_sharpen=kernel_sharpen)
+
     return output
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--path", help="the path of image", default="test.png")
     parser.add_argument("--operation", help="operation apply in image", default="Convolution2D")
+    parser.add_argument("--size_bluring", help="size of kernel bluring", default=SIZE_BLURING)
+    parser.add_argument("--kernel_sharpen", help="The kernel sharpening", default=1)
     args = parser.parse_args()
+    print(args)
     path_image = args.path
     operation = args.operation
 
@@ -41,7 +51,7 @@ def main():
 
     # otherwise
     image = cv2.imread(path_image)
-    output = process(image=image, name_algorithm=operation)
+    output = process(image=image, name_algorithm=operation, args=args)
     while True:
         cv2.imshow('Origin', image)
         cv2.imshow('Output', output)
