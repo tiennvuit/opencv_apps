@@ -24,12 +24,19 @@ def process(image, name_algorithm: str, args):
 
     if name_algorithm == 'Convolution2D':
         output = Algorithm.Convolution2D(image)
+
     if name_algorithm == 'Bluring':
         size_bluring = int(args.size_bluring)
         output = Algorithm.Bluring(image=image, size=size_bluring)
+
     if name_algorithm == 'Sharpening':
         kernel_sharpen = str(args.kernel_sharpen)
         output = Algorithm.Sharpening(image=image, selected_kernel_sharpen=kernel_sharpen)
+
+    if name_algorithm == 'Embossing':
+        kernel_emboss = args.kernel_emboss
+        output = Algorithm.Embossing(image=image, selected_kernel_emboss=kernel_emboss)
+
     if name_algorithm == 'Color_space_convert':
         src_cs = args.src_cs
         dst_cs = args.dst_cs
@@ -42,7 +49,8 @@ def main():
     parser.add_argument("--path", help="the path of image", default="test.png")
     parser.add_argument("--operation", help="operation apply in image", default="Convolution2D")
     parser.add_argument("--size_bluring", help="size of kernel bluring", default=SIZE_BLURING)
-    parser.add_argument("--kernel_sharpen", help="The kernel sharpening", default=1)
+    parser.add_argument("--kernel_sharpen", help="the kernel sharpening", default=1)
+    parser.add_argument("--kernel_emboss", help="the kernel embossing", default=1)
     args = parser.parse_args()
     print(args)
     path_image = args.path
