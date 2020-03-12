@@ -34,13 +34,19 @@ def process(image, name_algorithm: str, args):
         output = Algorithm.Sharpening(image=image, selected_kernel_sharpen=kernel_sharpen)
 
     if name_algorithm == 'Embossing':
-        kernel_emboss = args.kernel_emboss
+        kernel_emboss = str(args.kernel_emboss)
         output = Algorithm.Embossing(image=image, selected_kernel_emboss=kernel_emboss)
 
+    if name_algorithm == 'Embossing_advance':
+        kernel_emboss_adv = str(args.kernel_emboss_adv)
+        ksize = int(args.ksize)
+        print(kernel_emboss_adv)
+        output = Algorithm.Embossing_advance(image=image, selected_kernel_emboss=kernel_emboss_adv, ksize=ksize)
+
     if name_algorithm == 'Color_space_convert':
-        src_cs = args.src_cs
+        source_cs = args.src_cs
         dst_cs = args.dst_cs
-        output = Algorithm.Color_space_convert(image=image, src_cs = src_cs, dst_cs = dst_cs)
+        output = Algorithm.Color_space_convert(image=image, src_cs = src_cs, dst_cs=dst_cs)
 
     return output
 
@@ -51,6 +57,8 @@ def main():
     parser.add_argument("--size_bluring", help="size of kernel bluring", default=SIZE_BLURING)
     parser.add_argument("--kernel_sharpen", help="the kernel sharpening", default=1)
     parser.add_argument("--kernel_emboss", help="the kernel embossing", default=1)
+    parser.add_argument("--kernel_emboss_adv", help="the kernel embossing advance", default='sobel_horizontal')
+    parser.add_argument("--ksize", help="kernel size value in Sobel filter", default=5)
     args = parser.parse_args()
     print(args)
     path_image = args.path

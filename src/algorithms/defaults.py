@@ -19,7 +19,7 @@ VALID_ALGORITHMS = {
         'Bluring',
         'Sharpening',
         'Embossing',
-        'Enbossing_advance',
+        'Embossing_advance',
         'Erosion_dilation',
         'Vignette_filter',
         'Vifnette_gaussian',
@@ -61,4 +61,4 @@ KERNEL_EMBOSS = {
                 [[1,0,0],
                 [0,0,0],
                 [0,0,-1]]),
-} 
+}
