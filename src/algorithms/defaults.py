@@ -1,4 +1,5 @@
 import numpy as np
+import cv2
 
 DEFAULT_DDEPTH = -1
 
@@ -10,4 +11,8 @@ KERNEL_3x3 = np.ones((3,3), np.float32) / 9.0
 
 KERNEL_5x5 = np.ones((5,5), np.float32) / 25.0
 
-ALGORITHMS = {'Convolution': 'convolution2D'}
+# DEFAULT_DIM = (600,400)
+
+DEFAULT_INTERPOLATION = cv2.INTER_AREA
+
+VALID_ALGORITHMS = {'Convolution2D'}
