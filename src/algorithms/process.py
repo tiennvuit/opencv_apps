@@ -31,9 +31,9 @@ def process(image, name_algorithm: str, args):
         kernel_sharpen = str(args.kernel_sharpen)
         output = Algorithm.Sharpening(image=image, selected_kernel_sharpen=kernel_sharpen)
     if name_algorithm == 'Color_space_convert':
-        src_cs = args.src_cs
-        dst_cs = args.dst_cs
-        output = Algorithm.Color_space_convert(image=image, src_cs = src_cs, dst_cs = dst_cs)
+        source_cs = args.source_cs
+        destination_cs = args.destination_cs
+        output = Algorithm.Color_space_convert(image=image, src_cs=source_cs, dst_cs=destination_cs)
 
     return output
 
@@ -43,8 +43,9 @@ def main():
     parser.add_argument("--operation", help="operation apply in image", default="Convolution2D")
     parser.add_argument("--size_bluring", help="size of kernel bluring", default=SIZE_BLURING)
     parser.add_argument("--kernel_sharpen", help="The kernel sharpening", default=1)
+    parser.add_argument("--source_cs", help="color space source", default='RGB')
+    parser.add_argument("--destination_cs", help="color space destination", default='GRAY')
     args = parser.parse_args()
-    print(args)
     path_image = args.path
     operation = args.operation
 

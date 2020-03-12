@@ -14,6 +14,7 @@ KERNEL_5x5 = np.ones((5,5), np.float32) / 25.0
 DEFAULT_INTERPOLATION = cv2.INTER_AREA
 
 VALID_ALGORITHMS = {
+        'Color_space_convert',
         'Convolution2D',
         'Color_space_convert',
         'Bluring',
