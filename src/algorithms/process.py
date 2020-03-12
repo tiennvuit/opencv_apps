@@ -30,6 +30,10 @@ def process(image, name_algorithm: str, args):
     if name_algorithm == 'Sharpening':
         kernel_sharpen = str(args.kernel_sharpen)
         output = Algorithm.Sharpening(image=image, selected_kernel_sharpen=kernel_sharpen)
+    if name_algorithm == 'Color_space_convert':
+        src_cs = args.src_cs
+        dst_cs = args.dst_cs
+        output = Algorithm.Color_space_convert(image=image, src_cs = src_cs, dst_cs = dst_cs)
 
     return output
 
