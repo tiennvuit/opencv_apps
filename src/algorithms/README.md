@@ -1,1 +1,1 @@
-# Source code of algorithms OpenCV
+# The colection of function in OpenCV.
