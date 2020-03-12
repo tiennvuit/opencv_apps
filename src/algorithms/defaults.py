@@ -15,6 +15,7 @@ DEFAULT_INTERPOLATION = cv2.INTER_AREA
 
 VALID_ALGORITHMS = {
         'Convolution2D',
+        'Color_space_convert',
         'Bluring',
         'Sharpening',
         'Embossing',
