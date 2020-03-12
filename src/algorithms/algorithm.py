@@ -128,3 +128,8 @@ class Algorithm():
         img = Mix_channel(img,takepresent(dstset),dst_cs)
 
         return img
+    
+    def translation(img,dx,dy):
+	rows, cols = img.shape[:2]
+	translation_mat = np.float32([[1,0,dx],[0,1,dy]])
+	return cv2.warpAffine(img,translation_mat, (rows+abs(dx),cols+abs(dy)))
