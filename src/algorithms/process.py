@@ -44,9 +44,9 @@ def process(image, name_algorithm: str, args):
         output = Algorithm.Embossing_advance(image=image, selected_kernel_emboss=kernel_emboss_adv, ksize=ksize)
 
     if name_algorithm == 'Color_space_convert':
-        source_cs = args.src_cs
-        dst_cs = args.dst_cs
-        output = Algorithm.Color_space_convert(image=image, src_cs = src_cs, dst_cs=dst_cs)
+        source_cs = args.source_cs
+        destination_cs = args.destination_cs
+        output = Algorithm.Color_space_convert(image=image, src_cs=source_cs, dst_cs=destination_cs)
 
     return output
 
