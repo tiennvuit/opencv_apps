@@ -53,6 +53,8 @@ def process(image, name_algorithm: str, args):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--path", help="the path of image", default="test.png")
+    parser.add_argument("--source_cs", help="color space source", default='RGB')
+    parser.add_argument("--destination_cs", help="color space destination", default='GRAY')
     parser.add_argument("--operation", help="operation apply in image", default="Convolution2D")
     parser.add_argument("--size_bluring", help="size of kernel bluring", default=SIZE_BLURING)
     parser.add_argument("--kernel_sharpen", help="the kernel sharpening", default=1)
