@@ -147,7 +147,7 @@ class Algorithm():
 	    Args:
 	        img(array) : image array
 		angle(int) : angle to rotate
-	    Return image after being translated
+	    Return image after being rotated
 	    Example:
 	""""
 	num_rows, num_cols = img.shape[:2]
@@ -253,3 +253,5 @@ class Algorithm():
                     img_output[i,j] = img[i,(j+offset_x)%cols] 
                 else: 
                     img_output[i,j] = 0
+		
+	return img_output
