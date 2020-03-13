@@ -34,15 +34,45 @@ def process(image, name_algorithm: str, args):
         src_cs = args.src_cs
         dst_cs = args.dst_cs
         output = Algorithm.Color_space_convert(image=image, src_cs = src_cs, dst_cs = dst_cs)
+    if name_algorithm == 'Translation':
+        dx = int(args.dx)
+        dy = int(args.dy)
+        output = Algorithm.Translation(img=image,dx=dx,dy=dy)
+    if name_algorithm == 'Rotation':
+        angle = int(args.angle)
+        output = Algorithm.Rotation(img=image,angle=angle)
+    if name_algorithm == 'Scale':
+        fx = float(args.fx)
+        fy = float(args.fy)
+        output = Algorithm.Scaling(img=image,dx=dx,dy=dy)
+    if name_algorithm == 'Vertical_wave':
+        dx = int(args.dx)
+        output = Algorithm.Vertical_wave(img=image,dx=dx)
+    if name_algorithm == 'Horizontal_wave':
+        dy = int(args.dy)
+        output = Algorithm.Horizontal_wave(img=image,dy=dy)
+    if name_algorithm == 'Double_wave':
+        dx = int(args.dx)
+        dy = int(args.dy)
+        output = Algorithm.Double_wave(img=image,dx=dx,dy=dy)
+    if name_algorithm == 'Concave_effect':
+        output = Algorithm.Concave_effect(img=image)
 
     return output
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--path", help="the path of image", default="test.png")
+    parser.add_argument("--source_cs", help="color space source", default='RGB')
+    parser.add_argument("--destination_cs", help="color space destination", default='GRAY')
     parser.add_argument("--operation", help="operation apply in image", default="Convolution2D")
     parser.add_argument("--size_bluring", help="size of kernel bluring", default=SIZE_BLURING)
     parser.add_argument("--kernel_sharpen", help="The kernel sharpening", default=1)
+    parser.add_argument("--dx", help= "distance along x-axis", default =0)
+    parser.add_argument("--dy", help = "distance along y-axis", default =0)
+    parser.add_argument("--fx", help= "ratio along x-axis", default =0)
+    parser.add_argument("--fy", help = "ratio along y-axis", default =0)
+    parser.add_argument("--angle", help = "angle", default = 0)
     args = parser.parse_args()
     print(args)
     path_image = args.path
