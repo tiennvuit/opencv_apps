@@ -96,7 +96,7 @@ class Algorithm():
     def Color_space_convert(img,src_cs = 'RGB',dst_cs='BGR'):
         r"""
             Args:
-                img(array of uint32) : image array 
+                img(array) : image array 
                 src_cs(str) : original space color
                 dst(str) : target space color 
             Return image array after being converted 
@@ -129,7 +129,31 @@ class Algorithm():
 
         return img
     
-    def translation(img,dx,dy):
+    def Translation(img,dx,dy):
+	r"""
+	    Args:
+	        img(array) : image array
+		dx : translation distance along x-axis
+		dy : translation distance along y-axis
+	    Return image after being translated
+	    Example:
+	""""
 	rows, cols = img.shape[:2]
 	translation_mat = np.float32([[1,0,dx],[0,1,dy]])
 	return cv2.warpAffine(img,translation_mat, (rows+abs(dx),cols+abs(dy)))
+
+    def Rotation(img,angle):
+	r"""
+	    Args:
+	        img(array) : image array
+		angle(int) : angle to rotate
+	    Return image after being translated
+	    Example:
+	""""
+	num_rows, num_cols = img.shape[:2]
+
+        translation_matrix = np.float32([ [1,0,int(0.5*num_cols)], [0,1,int(0.5*num_rows)] ])
+        rotation_matrix = cv2.getRotationMatrix2D((num_cols, num_rows), angle, 1)
+
+        img_translation = cv2.warpAffine(img, translation_matrix, (2*num_cols, 2*num_rows))
+        img_rotation = cv2.warpAffine(img_translation, rotation_matrix, (num_cols*2, num_rows*2))
