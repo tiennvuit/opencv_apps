@@ -170,3 +170,86 @@ class Algorithm():
 	""""
 	return cv2.resize(img,None,fx=fx, fy=fy, interpolation = cv2.INTER_LINEAR)
 
+    def Vertical_wave(img,dx):
+	r"""
+	    Args:
+	        img(array) : image array
+		dx(float) : waving distance along x-axis
+		
+	    Return image after being waved
+	    Example:
+	""""
+	img_output = np.zeros(img.shape, dtype=img.dtype) 
+	rows,cols = img.shape[:2]
+	for i in range(rows):
+	    for j in range(cols): 
+		offset_x = int(dx * math.sin(2 * 3.14 * i / 180)) 
+		offset_y = 0 
+		if j+offset_x < rows: 
+		    img_output[i,j] = img[i,(j+offset_x)%cols] 
+		else: 
+		    img_output[i,j] = 0 
+	return img_output
+
+    def Horizontal_wave(img,dy):
+	r"""
+	    Args:
+	        img(array) : image array
+		dy(float) : waving distance along y-axis
+		
+	    Return image after being waved
+	    Example:
+	""""
+	img_output = np.zeros(img.shape, dtype=img.dtype) 
+	rows,cols = img.shape[:2]
+	for i in range(rows):
+	    for j in range(cols): 
+		offset_y = int(dy * math.sin(2 * 3.14 * j / 150)) 
+		offset_x = 0 
+		if i+offset_y < rows: 
+                    img_output[i,j] = img[(i+offset_y)%rows,j] 
+                else: 
+                    img_output[i,j] = 0  
+	return img_output
+
+    def Double_wave(img,dy):
+	r"""
+	    Args:
+	        img(array) : image array
+		dx(float) : waving distance along x-axis
+		dy(float) : waving distance along y-axis
+		
+	    Return image after being waved
+	    Example:
+	""""
+	img_output = np.zeros(img.shape, dtype=img.dtype) 
+	rows,cols = img.shape[:2]
+	for i in range(rows):
+	    for j in range(cols): 
+		offset_x = int(dx * math.sin(2 * 3.14 * i / 150)) 
+                offset_y = int(dy * math.cos(2 * 3.14 * j / 150)) 
+                if i+offset_y < rows and j+offset_x < cols: 
+                    img_output[i,j] = img[(i+offset_y)%rows,(j+offset_x)%cols] 
+                else: 
+                    img_output[i,j] = 0   
+	return img_output
+
+    def Concave_effect(img):
+	r"""
+	    Args:
+	        img(array) : image array
+		
+		
+	    Return image 
+	    Example:
+	""""
+	img_output = np.zeros(img.shape, dtype=img.dtype) 
+	rows,cols = img.shape[:2]
+        for i in range(rows): 
+            for j in range(cols): 
+                offset_x = int(128.0 * math.sin(2 * 3.14 * i / (2*cols))) 
+                offset_y = 0 
+                if j+offset_x < cols: 
+                    img_output[i,j] = img[i,(j+offset_x)%cols] 
+                else: 
+                    img_output[i,j] = 0
