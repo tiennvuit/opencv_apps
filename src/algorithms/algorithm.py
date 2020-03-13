@@ -156,4 +156,17 @@ class Algorithm():
         rotation_matrix = cv2.getRotationMatrix2D((num_cols, num_rows), angle, 1)
 
         img_translation = cv2.warpAffine(img, translation_matrix, (2*num_cols, 2*num_rows))
-        img_rotation = cv2.warpAffine(img_translation, rotation_matrix, (num_cols*2, num_rows*2))
+        return cv2.warpAffine(img_translation, rotation_matrix, (num_cols*2, num_rows*2))
+	
+	
+    def Scaling(img,fx,fy):
+	r"""
+	    Args:
+	        img(array) : image array
+		fx(float) : ratio along x-axis
+		fy(float) : ratio along y-axis
+	    Return image after being scaled
+	    Example:
+	""""
+	return cv2.resize(img,None,fx=fx, fy=fy, interpolation = cv2.INTER_LINEAR)
+
