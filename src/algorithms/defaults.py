@@ -25,6 +25,13 @@ VALID_ALGORITHMS = {
         'Vignette_filter',
         'Vifnette_gaussian',
         'Enhancing_contrast',
+        'Translation',
+        'Rotation',
+        'Scale',
+        'Vertical_wave',
+        'Horizontal_wave',
+        'Double_wave',
+        'Concave_effect',
 }
 
 SIZE_BLURING = 15

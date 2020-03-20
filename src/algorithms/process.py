@@ -65,6 +65,37 @@ def process(image, name_algorithm: str, args):
         option = args.option_contrast
         output = Algorithm.Enhancing_contrast(image=image, option=option)
 
+    if name_algorithm == 'Translation':
+        dx = int(args.dx)
+        dy = int(args.dy)
+        output = Algorithm.Translation(img=image,dx=dx,dy=dy)
+
+    if name_algorithm == 'Rotation':
+        angle = int(args.angle)
+        output = Algorithm.Rotation(img=image,angle=angle)
+
+    if name_algorithm == 'Scale':
+        fx = float(args.fx)
+        fy = float(args.fy)
+        output = Algorithm.Scaling(img=image,fx=fx,fy=fy)
+
+    if name_algorithm == 'Vertical_wave':
+        dx = int(args.dx)
+        output = Algorithm.Vertical_wave(img=image,dx=dx)
+
+    if name_algorithm == 'Horizontal_wave':
+        dy = int(args.dy)
+        output = Algorithm.Horizontal_wave(img=image,dy=dy)
+
+    if name_algorithm == 'Double_wave':
+        dx = int(args.dx)
+        dy = int(args.dy)
+        output = Algorithm.Double_wave(img=image,dx=dx,dy=dy)
+
+    if name_algorithm == 'Concave_effect':
+        output = Algorithm.Concave_effect(img=image)
+
+
     return output
 
 def main():
@@ -75,11 +106,17 @@ def main():
     parser.add_argument("--operation", help="operation apply in image", default="Convolution2D")
     parser.add_argument("--size_bluring", help="size of kernel bluring", default=SIZE_BLURING)
     parser.add_argument("--kernel_sharpen", help="the kernel sharpening", default=1)
+    parser.add_argument("--dx", help= "distance along x-axis", default =0)
+    parser.add_argument("--dy", help = "distance along y-axis", default =0)
+    parser.add_argument("--fx", help= "ratio along x-axis", default =0)
+    parser.add_argument("--fy", help = "ratio along y-axis", default =0)
+    parser.add_argument("--angle", help = "angle", default = 0)
     parser.add_argument("--kernel_emboss", help="the kernel embossing", default=1)
     parser.add_argument("--kernel_emboss_adv", help="the kernel embossing advance", default='sobel_horizontal')
     parser.add_argument("--ksize", help="kernel size value in Sobel filter", default=5)
     parser.add_argument("--iterations", help="Iteration in erosion/dilate", default=1)
     parser.add_argument("--option_contrast", help="Choose the way enhance contrast", default=None)
+
     args = parser.parse_args()
     path_image = args.path
     operation = args.operation
