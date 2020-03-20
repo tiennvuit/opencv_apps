@@ -44,7 +44,7 @@ def process(image, name_algorithm: str, args):
     if name_algorithm == 'Scale':
         fx = float(args.fx)
         fy = float(args.fy)
-        output = Algorithm.Scaling(img=image,dx=dx,dy=dy)
+        output = Algorithm.Scaling(img=image,fx=fx,fy=fy)
     if name_algorithm == 'Vertical_wave':
         dx = int(args.dx)
         output = Algorithm.Vertical_wave(img=image,dx=dx)
