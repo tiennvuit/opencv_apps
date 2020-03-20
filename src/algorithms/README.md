@@ -1,6 +1,5 @@
 # Guide for adding functions/operations to app.
 
-1
 To insert one operation/algorithm into app, do the following steps:
 
 -  **Define** a function for the operation with the relevance parameters in the class Algorithm.
