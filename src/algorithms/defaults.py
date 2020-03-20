@@ -14,18 +14,17 @@ KERNEL_5x5 = np.ones((5,5), np.float32) / 25.0
 DEFAULT_INTERPOLATION = cv2.INTER_AREA
 
 VALID_ALGORITHMS = {
-        'Color_space_convert',
         'Convolution2D',
         'Color_space_convert',
         'Bluring',
         'Sharpening',
         'Embossing',
-        'Enbossing_advance',
-        'Erosion_dilation',
+        'Embossing_advance',
+        'Erosion',
+        'Dilation',
         'Vignette_filter',
         'Vifnette_gaussian',
         'Enhancing_contrast',
-        'Enhancing_constrast2',
 }
 
 SIZE_BLURING = 15
@@ -48,3 +47,18 @@ KERNEL_SHAPEN = {
                         [-1,2,2,2,-1],
                         [-1,-1,-1,-1,-1]]) / 8.0,
         }
+
+KERNEL_EMBOSS = {
+        '1':np.array(
+                [[0,-1,-1],
+                [1,0,-1],
+                [1,1,0]]),
+        '2':np.array(
+                [[-1,-1,0],
+                [-1,0,1],
+                [0,1,1]]),
+        '3':np.array(
+                [[1,0,0],
+                [0,0,0],
+                [0,0,-1]]),
+}
