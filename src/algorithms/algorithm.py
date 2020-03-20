@@ -78,8 +78,8 @@ class Algorithm():
         """
         @params:
             - image(object): the image object that need bluring
-            - ddepth(int): the depth of image output
-            - selected_kernel_emboss (enum: {1,2,3})
+            - selected_kernel_emboss (str) is the method will apply on image
+            - ksize (int):
         @return value:
             - the image object applied embossed
         @refernce from:
@@ -99,6 +99,106 @@ class Algorithm():
             print("The kernel is not valid !")
             sys.exit(2)
         return output
+
+    def Erosion(image, ksize=5, iterations=1):
+        """
+        @params:
+            - image(object): the image object that need bluring
+            - ksize (int): the size of kernel will apply Convolution2D
+            - iterations (int)
+        @return value:
+            - the image object applied erosion
+        @refernce from:
+            - https://github.com/PacktPublishing/OpenCV-3-x-with-Python-By-Example/blob/master/Chapter02/06_erosion_dilation.py
+
+        """
+        kernel = np.ones((ksize, ksize), np.uint8)
+        img_erosion = cv2.erode(image, kernel, iterations=1)
+        return img_erosion
+
+    def Dilation(image, ksize=5, iterations=1):
+        """
+        @params:
+            - image(object): the image object that need bluring
+            - ksize (int): the size of kernel will apply Convolution2D
+            - iterations (int)
+        @return value:
+            - the image object applied dilation
+        @refernce from:
+            - https://github.com/PacktPublishing/OpenCV-3-x-with-Python-By-Example/blob/master/Chapter02/06_erosion_dilation.py
+
+        """
+
+        kernel = np.ones((ksize, ksize), np.uint8)
+        img_dilation = cv2.dilate(image, kernel, iterations=1)
+        return img_dilation
+
+    def Vignette_filter(image):
+        """
+        @params:
+            - image(object): the image object that need bluring
+            - ksize (int): the size of kernel will apply Convolution2D
+            - iterations (int)
+        @return value:
+            - the image object applied erosion
+        @refernce from:
+            - https://github.com/PacktPublishing/OpenCV-3-x-with-Python-By-Example/blob/master/Chapter02/06_erosion_dilation.py
+
+        """
+
+        rows, cols = image.shape[:2]
+
+        # generating vignette mask using Gaussian kernels
+        kernel_x = cv2.getGaussianKernel(cols,200)
+        kernel_y = cv2.getGaussianKernel(rows,200)
+        kernel = kernel_y * kernel_x.T
+        mask = 255 * kernel / np.linalg.norm(kernel)
+        output = np.copy(image)
+
+        # applying the mask to each channel in the input image
+        for i in range(3):
+            output[:,:,i] = output[:,:,i] * mask
+
+        return output
+
+    def Vifnette_gaussian(image):
+        """
+        @params:
+            - image(object): the image object that need bluring
+        @return value:
+            - the image object applied Vifnette_gaussian
+        @refernce from:
+            - https://github.com/PacktPublishing/OpenCV-3-x-with-Python-By-Example/blob/master/Chapter02/06_erosion_dilation.py
+
+        """
+        rows, cols = img.shape[:2]
+
+        # generating vignette mask using Gaussian kernels
+        kernel_x = cv2.getGaussianKernel(int(1.5*cols),200)
+        kernel_y = cv2.getGaussianKernel(int(1.5*rows),200)
+        kernel = kernel_y * kernel_x.T
+        mask = 255 * kernel / np.linalg.norm(kernel)
+        mask = mask[int(0.5*rows):, int(0.5*cols):]
+        output = np.copy(img)
+
+        # applying the mask to each channel in the input image
+        for i in range(3):
+            output[:,:,i] = output[:,:,i] * mask
+        return output
+
+    # def Enhancing_contrast(image, option=None):
+    #
+    #    if option==None:
+    #        output = cv2.equalizeHist(src=image)
+    #    elif option == '2':
+    #        grayimg = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    #        # equalize the histogram of the Y channel
+    #        img_grey[:,:,0] = cv2.equalizeHist(grayimg[:,:,0])
+    #        # convert the YUV image back to RGB format
+    #        output = cv2.cvtColor(img_grey, cv2.COLOR_GRAY2RGB)
+    #
+    #    return output
+
 
     def Mix_channel(image, src_cs: str, dst_cs: str):
         if src_cs == dst_cs:

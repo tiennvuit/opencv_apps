@@ -48,6 +48,23 @@ def process(image, name_algorithm: str, args):
         destination_cs = args.destination_cs
         output = Algorithm.Color_space_convert(image=image, src_cs=source_cs, dst_cs=destination_cs)
 
+    if name_algorithm == 'Erosion':
+        ksize = int(args.ksize)
+        iterations = int(args.iterations)
+        output = Algorithm.Erosion(image, ksize=ksize, iterations=iterations)
+
+    if name_algorithm == 'Dilation':
+        ksize = int(args.ksize)
+        iterations = int(args.iterations)
+        output = Algorithm.Dilation(image, ksize=ksize, iterations=iterations)
+
+    if name_algorithm == 'Vignette_filter':
+        output = Algorithm.Vignette_filter(image)
+
+    if name_algorithm == 'Enhancing_contrast':
+        option = args.option_contrast
+        output = Algorithm.Enhancing_contrast(image=image, option=option)
+
     return output
 
 def main():
@@ -61,6 +78,8 @@ def main():
     parser.add_argument("--kernel_emboss", help="the kernel embossing", default=1)
     parser.add_argument("--kernel_emboss_adv", help="the kernel embossing advance", default='sobel_horizontal')
     parser.add_argument("--ksize", help="kernel size value in Sobel filter", default=5)
+    parser.add_argument("--iterations", help="Iteration in erosion/dilate", default=1)
+    parser.add_argument("--option_contrast", help="Choose the way enhance contrast", default=None)
     args = parser.parse_args()
     print(args)
     path_image = args.path
