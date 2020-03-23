@@ -57,6 +57,16 @@ def process(image, name_algorithm: str, args):
         output = Algorithm.Double_wave(img=image,dx=dx,dy=dy)
     if name_algorithm == 'Concave_effect':
         output = Algorithm.Concave_effect(img=image)
+    if name_algorithm == 'GaussianBlur':
+        kernel_size = int(args.kernel_size_gauss)
+        devitation = int(args.devitation)
+        output = Algorithm.Gaussian_blur(img=image,kernel_size=kernel_size,devitation=devitation)
+    if name_algorithm == 'BilateralBlur':
+        diameter = int(args.diameter)
+        sigma_color = int(args.sigma_color)
+        sigma_space = int(args.sigma_space)
+        output = Algorithm.Bilateral_blur(img=image,diameter=diameter,sigma_color=sigma_color,sigma_space=sigma_space)
+
 
     return output
 
@@ -73,6 +83,11 @@ def main():
     parser.add_argument("--fx", help= "ratio along x-axis", default =0)
     parser.add_argument("--fy", help = "ratio along y-axis", default =0)
     parser.add_argument("--angle", help = "angle", default = 0)
+    parser.add_argument("--kernel_size_gauss", help = "kernel size for GaussianBlur", default = 5)
+    parser.add_argument("--devitation", help = "devitaion for GaussianBlur", default = 0)
+    parser.add_argument("--diameter",help = "diameter for BilateralBlur",default = 9)
+    parser.add_argument("--sigma_color",help = "sigmacolor for BilateralBlur",default = 75)
+    parser.add_argument("--sigma_space",help = "sigmaspace for BilateralBlur",default = 75)
     args = parser.parse_args()
     print(args)
     path_image = args.path

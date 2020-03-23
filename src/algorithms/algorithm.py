@@ -253,3 +253,30 @@ class Algorithm():
                 else: 
                     img_output[i,j] = 0
         return img_output
+
+    def Gaussian_blur(img,kernel_size=5,devitation=0):
+        r'''
+            Args: 
+                img(array): image array
+                kernel_size(int): size of the kernel, should be positive and odd numbers
+                devitation(int): standard deviation in both X and Y direction
+            Return image after being blured
+            Example:
+        '''
+        return cv2.GaussianBlur(img,(kernel_size,kernel_size),devitation)
+
+    def Bilateral_blur(img,diameter=9,sigma_color=75,sigma_space=75):
+        r'''
+            Args:
+                img(array): image array
+                diameter(int): Diameter of each pixel neighborhood that is used during filtering
+                sigma_color(int): filter sigma in the color space. A larger value of the parameter means that farther colors within the 
+                        pixel neighborhood (see sigmaSpace) will be mixed together, resulting in larger areas of semi-equal color.
+                sigma_space(int): Filter sigma in the coordinate space. A larger value of the parameter means that farther pixels will 
+                        influence each other as long as their colors are close enough (see sigmaColor ). When d>0, it specifies the 
+                        neighborhood size regardless of sigmaSpace. Otherwise, d is proportional to sigmaSpace.
+            Return image after being blured
+            Example:
+        '''
+        return cv2.bilateralFilter(img, diameter, sigma_color, sigma_space)
+

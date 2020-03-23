@@ -25,6 +25,15 @@ VALID_ALGORITHMS = {
         'Vifnette_gaussian',
         'Enhancing_contrast',
         'Enhancing_constrast2',
+        'Translation',
+        'Rotation',
+        'Scale',
+        'Vertical_wave',
+        'Horizontal_wave',
+        'Double_wave',
+        'Concave_effect',
+        'GaussianBlur',
+        'BilateralBlur'
 }
 
 SIZE_BLURING = 15
