@@ -8,10 +8,10 @@ class Application(object):
 		self.master = master
 		self.Create_title_bar()
 		self.Create_modeoption_bar()
-		
+
 		#self.label = Button(self.master,text="Hello world")
 		#self.label.grid(row=1,column=0)
-		
+
 
 	def Run(self):
 		window_height = 600
@@ -49,7 +49,7 @@ class Application(object):
 		self.label1 = Label(self.titlebar,text='Image Process App',height=1,width=98,bg='#66ffff')
 		self.label1.grid(row=0,column=1)
 
-		self.quitbutton_img = ImageTk.PhotoImage(Image.open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'image','quitbutton.png')))
+		self.quitbutton_img = ImageTk.PhotoImage(Image.open(os.path.join(os.path.dirname(os.path.abspath(__file__)),'image','quitbutton.PNG')))
 		self.quitbutton = Button(self.titlebar,image=self.quitbutton_img,command = self.Close,height=30,width=30)
 		self.quitbutton.grid(row=0,column=3)
 
@@ -57,7 +57,7 @@ class Application(object):
 		self.minimizebutton = Button(self.titlebar,image=self.minimizebutton_img,command = self.Minimize,height=30,width=30)
 		self.minimizebutton.grid(row=0,column=2)
 
-		
+
 		self.titlebar.grid(row=0,column=0)
 		self.titlebar.bind("<Map>",self.Frame_mapped)
 
@@ -67,7 +67,7 @@ class Application(object):
 			self.firstbutton.configure(text="Video")
 			self.secondbutton.configure(text="Stream")
 			self.thirdbutton.configure(text="Image")
-			return 
+			return
 		if str=="Video":
 			self.firstbutton.configure(text="Image")
 			self.secondbutton.configure(text="Stream")
