@@ -49,11 +49,10 @@ class Titlebar(Component):
 		self.minimizebutton.grid(row=ROW,column=MINIMIZEBUTTON_COLUMN)
 
 		
-		self.grid(row=0,column=0)
+		self.grid(row=0,column=0,columnspan=2)
 		self.bind("<Map>",self.Frame_mapped)
 
 	def Frame_mapped(self,e):
-		print(self,e)
 		self.master.update_idletasks()
 		self.master.overrideredirect(True)
 		self.master.state('normal')

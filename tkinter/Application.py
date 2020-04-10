@@ -4,19 +4,23 @@ from PIL import ImageTk,Image
 from Component import Component
 from Titlebar import Titlebar
 from Modebar import Modebar
+from Image_executer import Image_executer 
 
 
 class Application(object):
+	HEIGHT = 600
+	WIDTH = 800
+
 	def __init__(self,master):
 		self.master = master
 		self.titlebar = Titlebar(self.master)
 		self.modeoptionbar = Modebar(self.master)
-		
+		self.image_executer = Image_executer(self.master)
 		
 
 	def Run(self):
-		window_height = 600
-		window_width = 800
+		window_height = Application.HEIGHT
+		window_width = Application.WIDTH
 		screen_width = self.master.winfo_screenwidth()
 		screen_height = self.master.winfo_screenheight()
 		x_cordinate = int((screen_width/2) - (window_width/2))
@@ -30,5 +34,4 @@ class Application(object):
 
 root = Tk()
 a = Application(root)
-print(type(a))
 a.Run()
