@@ -33,7 +33,7 @@ class Modebar(Component):
 			self.firstbutton.configure(text="Video")
 			self.secondbutton.configure(text="Stream")
 			self.thirdbutton.configure(text="Image")
-			return 
+			return
 		if str=="Video":
 			self.firstbutton.configure(text="Image")
 			self.secondbutton.configure(text="Stream")

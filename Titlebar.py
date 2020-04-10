@@ -48,8 +48,13 @@ class Titlebar(Component):
 		self.minimizebutton = Button(self,image=self.minimizebutton_img,command = self.Minimize,height=MINIMIZEBUTTON_HEIGHT,width=MINIMIZEBUTTON_WIDTH)
 		self.minimizebutton.grid(row=ROW,column=MINIMIZEBUTTON_COLUMN)
 
+<<<<<<< HEAD:tkinter/Titlebar.py
 		
 		self.grid(row=0,column=0,columnspan=2)
+=======
+
+		self.grid(row=0,column=0)
+>>>>>>> 98bc09626098514e4fafa6e774d1016f21be4fa1:Titlebar.py
 		self.bind("<Map>",self.Frame_mapped)
 
 	def Frame_mapped(self,e):

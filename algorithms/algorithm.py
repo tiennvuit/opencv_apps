@@ -46,7 +46,7 @@ class Algorithm():
         """
         output = cv2.filter2D(image, ddepth=ddepth, kernel=KERNEL_SHAPEN[selected_kernel_sharpen])
         return output
-    
+
     r"""Date: 12/3/2020
     Author: Nguyen Quoc Cuong
     """
@@ -58,13 +58,13 @@ class Algorithm():
         mapp = {}
         for i in range(len(dst_cs)):
 	        mapp[dst_cs[i]] = i
-    
+
         fromto = []
 
         for i in range(len(src_cs)):
 	        fromto.append(i)
 	        fromto.append(mapp[src_cs[i]])
-    
+
         ret = np.zeros(img.shape, dtype = np.uint8 )
         cv2.mixChannels([img],[ret],fromto)
 
@@ -96,12 +96,12 @@ class Algorithm():
     def Color_space_convert(img,src_cs = 'RGB',dst_cs='BGR'):
         r"""
             Args:
-                img(array) : image array 
+                img(array) : image array
                 src_cs(str) : original space color
-                dst(str) : target space color 
-            Return image array after being converted 
+                dst(str) : target space color
+            Return image array after being converted
             Example:
-        """ 
+        """
         if src_cs == dst_cs:
     	    return img
 
@@ -128,7 +128,7 @@ class Algorithm():
         img = Mix_channel(img,takepresent(dstset),dst_cs)
 
         return img
-    
+
     def Translation(img,dx,dy):
 	    r"""
 	        Args:
@@ -156,8 +156,8 @@ class Algorithm():
 
         img_translation = cv2.warpAffine(img, translation_matrix, (2*num_cols, 2*num_rows))
         return cv2.warpAffine(img_translation, rotation_matrix, (num_cols*2, num_rows*2))
-	
-	
+
+
     def Scaling(img,fx,fy):
 	    r"""
 	        Args:
@@ -174,20 +174,20 @@ class Algorithm():
 	        Args:
 	            img(array) : image array
 		        dx(float) : waving distance along x-axis
-		
+
 	        Return image after being waved
 	        Example:
 	    """
-	    img_output = np.zeros(img.shape, dtype=img.dtype) 
+	    img_output = np.zeros(img.shape, dtype=img.dtype)
 	    rows,cols = img.shape[:2]
 	    for i in range(rows):
-	        for j in range(cols): 
-		        offset_x = int(dx * math.sin(2 * 3.14 * i / 180)) 
-		        offset_y = 0 
-		        if j+offset_x < rows: 
-		            img_output[i,j] = img[i,(j+offset_x)%cols] 
-		        else: 
-		            img_output[i,j] = 0 
+	        for j in range(cols):
+		        offset_x = int(dx * math.sin(2 * 3.14 * i / 180))
+		        offset_y = 0
+		        if j+offset_x < rows:
+		            img_output[i,j] = img[i,(j+offset_x)%cols]
+		        else:
+		            img_output[i,j] = 0
 	    return img_output
 
     def Horizontal_wave(img,dy):
@@ -195,20 +195,20 @@ class Algorithm():
 	        Args:
 	            img(array) : image array
 		        dy(float) : waving distance along y-axis
-		
+
 	        Return image after being waved
 	        Example:
 	    """
-        img_output = np.zeros(img.shape, dtype=img.dtype) 
+        img_output = np.zeros(img.shape, dtype=img.dtype)
         rows,cols = img.shape[:2]
         for i in range(rows):
-            for j in range(cols): 
-                offset_y = int(dy * math.sin(2 * 3.14 * j / 150)) 
-                offset_x = 0 
-                if i+offset_y < rows: 
-                    img_output[i,j] = img[(i+offset_y)%rows,j] 
-                else: 
-                    img_output[i,j] = 0  
+            for j in range(cols):
+                offset_y = int(dy * math.sin(2 * 3.14 * j / 150))
+                offset_x = 0
+                if i+offset_y < rows:
+                    img_output[i,j] = img[(i+offset_y)%rows,j]
+                else:
+                    img_output[i,j] = 0
         return img_output
 
     def Double_wave(img,dy):
@@ -217,46 +217,46 @@ class Algorithm():
 	            img(array) : image array
 		        dx(float) : waving distance along x-axis
 		        dy(float) : waving distance along y-axis
-		
+
 	        Return image after being waved
 	        Example:
 	    """
-        img_output = np.zeros(img.shape, dtype=img.dtype) 
+        img_output = np.zeros(img.shape, dtype=img.dtype)
         rows,cols = img.shape[:2]
         for i in range(rows):
-            for j in range(cols): 
-                offset_x = int(dx * math.sin(2 * 3.14 * i / 150)) 
-                offset_y = int(dy * math.cos(2 * 3.14 * j / 150)) 
-                if i+offset_y < rows and j+offset_x < cols: 
-                    img_output[i,j] = img[(i+offset_y)%rows,(j+offset_x)%cols] 
-                else: 
-                    img_output[i,j] = 0   
+            for j in range(cols):
+                offset_x = int(dx * math.sin(2 * 3.14 * i / 150))
+                offset_y = int(dy * math.cos(2 * 3.14 * j / 150))
+                if i+offset_y < rows and j+offset_x < cols:
+                    img_output[i,j] = img[(i+offset_y)%rows,(j+offset_x)%cols]
+                else:
+                    img_output[i,j] = 0
         return img_output
 
     def Concave_effect(img):
         r"""
 	        Args:
 	            img(array) : image array
-		
-		
-	        Return image 
+
+
+	        Return image
 	        Example:
 	    """
-        img_output = np.zeros(img.shape, dtype=img.dtype) 
+        img_output = np.zeros(img.shape, dtype=img.dtype)
         rows,cols = img.shape[:2]
-        for i in range(rows): 
-            for j in range(cols): 
-                offset_x = int(128.0 * math.sin(2 * 3.14 * i / (2*cols))) 
-                offset_y = 0 
-                if j+offset_x < cols: 
-                    img_output[i,j] = img[i,(j+offset_x)%cols] 
-                else: 
+        for i in range(rows):
+            for j in range(cols):
+                offset_x = int(128.0 * math.sin(2 * 3.14 * i / (2*cols)))
+                offset_y = 0
+                if j+offset_x < cols:
+                    img_output[i,j] = img[i,(j+offset_x)%cols]
+                else:
                     img_output[i,j] = 0
         return img_output
 
     def Gaussian_blur(img,kernel_size=5,devitation=0):
         r'''
-            Args: 
+            Args:
                 img(array): image array
                 kernel_size(int): size of the kernel, should be positive and odd numbers
                 devitation(int): standard deviation in both X and Y direction
@@ -270,13 +270,12 @@ class Algorithm():
             Args:
                 img(array): image array
                 diameter(int): Diameter of each pixel neighborhood that is used during filtering
-                sigma_color(int): filter sigma in the color space. A larger value of the parameter means that farther colors within the 
+                sigma_color(int): filter sigma in the color space. A larger value of the parameter means that farther colors within the
                         pixel neighborhood (see sigmaSpace) will be mixed together, resulting in larger areas of semi-equal color.
-                sigma_space(int): Filter sigma in the coordinate space. A larger value of the parameter means that farther pixels will 
-                        influence each other as long as their colors are close enough (see sigmaColor ). When d>0, it specifies the 
+                sigma_space(int): Filter sigma in the coordinate space. A larger value of the parameter means that farther pixels will
+                        influence each other as long as their colors are close enough (see sigmaColor ). When d>0, it specifies the
                         neighborhood size regardless of sigmaSpace. Otherwise, d is proportional to sigmaSpace.
             Return image after being blured
             Example:
         '''
         return cv2.bilateralFilter(img, diameter, sigma_color, sigma_space)
-

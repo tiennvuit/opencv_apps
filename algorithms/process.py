@@ -70,7 +70,27 @@ def process(image, name_algorithm: str, args):
 
     return output
 
-def main():
+def main(args):
+    path_image = args.path
+    operation = args.operation
+    # If the path of image and operation is valid
+    if not os.path.isfile(path_image):
+        print("The path of image is not exist !")
+        sys.exit(1)
+
+    # otherwise
+    image = cv2.imread(path_image)
+    output = process(image=image, name_algorithm=operation, args=args)
+    while True:
+        cv2.imshow('Origin', image)
+        cv2.imshow('Output', output)
+        c = cv2.waitKey()
+        if c == 27:
+            break
+    cv2.destroyAllWindows()
+    print("Thank you for your using !")
+
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--path", help="the path of image", default="test.png")
     parser.add_argument("--source_cs", help="color space source", default='RGB')
@@ -90,25 +110,4 @@ def main():
     parser.add_argument("--sigma_space",help = "sigmaspace for BilateralBlur",default = 75)
     args = parser.parse_args()
     print(args)
-    path_image = args.path
-    operation = args.operation
-
-    # If the path of image and operation is valid
-    if not os.path.isfile(path_image):
-        print("The path of image is not exist !")
-        sys.exit(1)
-
-    # otherwise
-    image = cv2.imread(path_image)
-    output = process(image=image, name_algorithm=operation, args=args)
-    while True:
-        cv2.imshow('Origin', image)
-        cv2.imshow('Output', output)
-        c = cv2.waitKey()
-        if c == 27:
-            break
-    cv2.destroyAllWindows()
-    print("Thank you for your using !")
-
-if __name__ == "__main__":
-    main()
+    main(args)
