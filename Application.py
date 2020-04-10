@@ -15,12 +15,7 @@ class Application(object):
 		self.master = master
 		self.titlebar = Titlebar(self.master)
 		self.modeoptionbar = Modebar(self.master)
-<<<<<<< HEAD:tkinter/Application.py
 		self.image_executer = Image_executer(self.master)
-		
-=======
-
->>>>>>> 98bc09626098514e4fafa6e774d1016f21be4fa1:Application.py
 
 	def Run(self):
 		window_height = Application.HEIGHT
