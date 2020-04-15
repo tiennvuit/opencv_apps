@@ -11,15 +11,17 @@ class Image_executer(Component):
 	IMAGE_PATH = 'image/icon-image-512.png'
 	PREVIOUS_PATH = 'image/previos_arrow.png'
 	NEXT_PATH = 'image/next_arrow.jpg'
-	PADY = 15
+	PADY = (15,15)
+	PADX = (5,5)
 	BUTTON_PADY = 165
 	HEIGHT = 600
 	WIDTH = 200
 	IMAGE_SIZE = (460,380)
 	MAX_ELEMENT = 40
+	BG = '#fcba03'
 
 	def __init__(self,master):
-		super(Image_executer, self).__init__(master,height=Image_executer.HEIGHT,width=Image_executer.WIDTH,bg ='#fcba03')
+		super(Image_executer, self).__init__(master,height=Image_executer.HEIGHT,width=Image_executer.WIDTH,bg =Image_executer.BG)
 		self.firstbutton_img = ImageTk.PhotoImage(Image.open(osp.join(osp.dirname(osp.abspath(__file__)),
 			Image_executer.PREVIOUS_PATH)))
 		self.firstbutton = Button(self,image=self.firstbutton_img,state='disabled')
@@ -30,7 +32,7 @@ class Image_executer(Component):
 		self.image = ImageTk.PhotoImage(self.original.resize(Image_executer.IMAGE_SIZE,Image.ANTIALIAS))
 		self.display = Canvas(self, bd=0, highlightthickness=0,width=Image_executer.IMAGE_SIZE[0])
 		self.display.create_image(0, 0, image=self.image, anchor=NW, tags="IMG")
-		self.display.grid(row=0,column=1,pady=(Image_executer.PADY,0), sticky=N+S)
+		self.display.grid(row=0,column=1,pady=Image_executer.PADY, sticky=N+S)
 
 		self.secondbutton_img = ImageTk.PhotoImage(Image.open(osp.join(osp.dirname(osp.abspath(__file__)),
 			Image_executer.NEXT_PATH)))
@@ -38,9 +40,25 @@ class Image_executer(Component):
 		self.secondbutton.grid(row=0,column = 2,pady=Image_executer.BUTTON_PADY,sticky=N)
 		self.secondbutton.bind('<Button-1>',self.Come_next)
 
-		self.thirdbutton = Button(self,text='Load an image',width=60)
-		self.thirdbutton.grid(row=1,column = 0,columnspan=3,sticky=N)
+		self.optionframe = Frame(self,bg = Image_executer.BG)
+
+		self.thirdbutton = Button(self.optionframe,text='Load an image',width=15)
+		self.thirdbutton.grid(row=0,column = 0,padx=Image_executer.PADX,sticky=N)
 		self.thirdbutton.bind('<Button-1>',self.Load)
+
+		self.fourthbutton = Button(self.optionframe,text='Capture',width=15)
+		self.fourthbutton.grid(row=0,column = 1,padx=Image_executer.PADX,sticky=N)
+		#self.fourthbutton.bind('<Button-1>',self.Load)	
+
+		self.fifthbutton = Button(self.optionframe,text='Delete',width=15)
+		self.fifthbutton.grid(row=0,column = 2,padx=Image_executer.PADX,sticky=N)
+		#self.fifthbutton.bind('<Button-1>',self.Load)	
+
+		self.sixthbutton = Button(self.optionframe,text='Visualie',width=15)
+		self.sixthbutton.grid(row=0,column = 3,padx=Image_executer.PADX,sticky=N)
+		#self.sixthbutton.bind('<Button-1>',self.Load)	
+
+		self.optionframe.grid(row=1,column=0,columnspan=3)
 
 		self.grid(row=2,column=1,columnspan=2,sticky=W)
 		self.it = 0
