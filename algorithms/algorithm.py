@@ -1,10 +1,11 @@
-from defaults import *
+from __future__ import absolute_import
+from algorithms.defaults import *
 
 
 class Algorithm():
     number_algorithm = 1
 
-    def Convolution2D(image, ddepth=-1, kernel=DEFAULT_FILTER):
+    def Convolution2D(self,image, ddepth=-1, kernel=DEFAULT_FILTER):
         """
         @params:
             - image(object): the image object that need bluring
@@ -18,7 +19,7 @@ class Algorithm():
         return output
 
 
-    def Bluring(image, ddepth=-1, size=SIZE_BLURING):
+    def Bluring(self,image, ddepth=-1, size=SIZE_BLURING):
         """
         @params:
             - image(object): the image object that need bluring
@@ -36,7 +37,7 @@ class Algorithm():
         return output
 
 
-    def Sharpening(image, ddepth=-1, selected_kernel_sharpen='1'):
+    def Sharpening(self,image, ddepth=-1, selected_kernel_sharpen='1'):
         """
         @params:
             - image(object): the image object that need bluring
@@ -51,7 +52,7 @@ class Algorithm():
     Author: Nguyen Quoc Cuong
     """
 
-    def Mix_channel(img,src_cs,dst_cs):
+    def Mix_channel(self,img,src_cs,dst_cs):
         if src_cs == dst_cs:
 	        return img
 
@@ -70,7 +71,7 @@ class Algorithm():
 
         return ret
 
-    def Change_to_RBG(img,src_cs):
+    def Change_to_RBG(self,img,src_cs):
 	    if src_cs == 'RGB':
 	        return img
 	    mapp = {
@@ -83,7 +84,7 @@ class Algorithm():
 	    return cv2.cvtColor(img,mapp[src_cs])
 
 
-    def Change_from_RBG(img,dst_cs):
+    def Change_from_RBG(self,img,dst_cs):
 	    mapp = {
 	        'XYZ':cv2.COLOR_RGB2XYZ,
 	        'HLS':cv2.COLOR_RGB2HLS,
@@ -93,7 +94,7 @@ class Algorithm():
 	    }
 	    return cv2.cvtColor(img,mapp[dst_cs])
 
-    def Color_space_convert(img,src_cs = 'RGB',dst_cs='BGR'):
+    def Color_space_convert(self,img,src_cs = 'RGB',dst_cs='BGR'):
         r"""
             Args:
                 img(array) : image array
@@ -108,28 +109,16 @@ class Algorithm():
         srcset = {x for x in src_cs}
         dstset = {x for x in dst_cs}
         if srcset == dstset:
-    	    return Mix_channel(img,src_cs,dst_cs)
+    	    return self.Mix_channel(img,src_cs,dst_cs)
 
-        def takepresent(sets):
-    	    if (sets =={'R','B','G'}):
-    		    return 'RGB'
-    	    if (sets =={'X','Y','Z'}):
-    		    return 'XYZ'
-    	    if (sets =={'H','L','S'}):
-    		    return 'HLS'
-    	    if (sets =={'H','S','V'}):
-    		    return 'HSV'
-    	    if (sets =={'G','R','A','Y'}):
-    		    return 'GRAY'
-
-        img = Mix_channel(img,src_cs,takepresent(srcset))
-        img = Change_to_RBG(img,takepresent(srcset))
-        img = Change_from_RBG(img,takepresent(dstset))
-        img = Mix_channel(img,takepresent(dstset),dst_cs)
+        img = self.Mix_channel(img,src_cs,self.takepresent(srcset))
+        img = self.Change_to_RBG(img,self.takepresent(srcset))
+        img = self.Change_from_RBG(img,self.takepresent(dstset))
+        img = self.Mix_channel(img,self.takepresent(dstset),dst_cs)
 
         return img
 
-    def Translation(img,dx,dy):
+    def Translation(self,img,dx,dy):
 	    r"""
 	        Args:
 	            img(array) : image array
@@ -142,7 +131,7 @@ class Algorithm():
 	    translation_mat = np.float32([[1,0,dx],[0,1,dy]])
 	    return cv2.warpAffine(img,translation_mat, (rows+abs(dx),cols+abs(dy)))
 
-    def Rotation(img,angle):
+    def Rotation(self,img,angle):
         r"""
 	        Args:
 	            img(array) : image array
@@ -158,7 +147,7 @@ class Algorithm():
         return cv2.warpAffine(img_translation, rotation_matrix, (num_cols*2, num_rows*2))
 
 
-    def Scaling(img,fx,fy):
+    def Scaling(self,img,fx,fy):
 	    r"""
 	        Args:
 	            img(array) : image array
@@ -169,7 +158,7 @@ class Algorithm():
 	    """
 	    return cv2.resize(img,None,fx=fx, fy=fy, interpolation = cv2.INTER_LINEAR)
 
-    def Vertical_wave(img,dx):
+    def Vertical_wave(self,img,dx):
 	    r"""
 	        Args:
 	            img(array) : image array
@@ -190,7 +179,7 @@ class Algorithm():
 		            img_output[i,j] = 0
 	    return img_output
 
-    def Horizontal_wave(img,dy):
+    def Horizontal_wave(self,img,dy):
         r"""
 	        Args:
 	            img(array) : image array
@@ -211,7 +200,7 @@ class Algorithm():
                     img_output[i,j] = 0
         return img_output
 
-    def Double_wave(img,dy):
+    def Double_wave(self,img,dy):
         r"""
 	        Args:
 	            img(array) : image array
@@ -233,7 +222,7 @@ class Algorithm():
                     img_output[i,j] = 0
         return img_output
 
-    def Concave_effect(img):
+    def Concave_effect(self,img):
         r"""
 	        Args:
 	            img(array) : image array
@@ -254,7 +243,7 @@ class Algorithm():
                     img_output[i,j] = 0
         return img_output
 
-    def Gaussian_blur(img,kernel_size=5,devitation=0):
+    def Gaussian_blur(self,img,kernel_size=5,devitation=0):
         r'''
             Args:
                 img(array): image array
@@ -265,7 +254,7 @@ class Algorithm():
         '''
         return cv2.GaussianBlur(img,(kernel_size,kernel_size),devitation)
 
-    def Bilateral_blur(img,diameter=9,sigma_color=75,sigma_space=75):
+    def Bilateral_blur(self,img,diameter=9,sigma_color=75,sigma_space=75):
         r'''
             Args:
                 img(array): image array
@@ -279,3 +268,15 @@ class Algorithm():
             Example:
         '''
         return cv2.bilateralFilter(img, diameter, sigma_color, sigma_space)
+
+    def takepresent(self,sets):
+        if (sets =={'R','B','G'}):
+            return 'RGB'
+        if (sets =={'X','Y','Z'}):
+            return 'XYZ'
+        if (sets =={'H','L','S'}):
+            return 'HLS'
+        if (sets =={'H','S','V'}):
+            return 'HSV'
+        if (sets =={'G','R','A','Y'}):
+            return 'GRAY'

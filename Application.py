@@ -1,3 +1,4 @@
+from __future__ import absolute_import
 from tkinter import *
 import os
 from PIL import ImageTk,Image
@@ -5,6 +6,7 @@ from Component import Component
 from Titlebar import Titlebar
 from Modebar import Modebar
 from Image_executer import Image_executer 
+from algorithms.algorithm import Algorithm
 
 
 class Application(object):
@@ -16,6 +18,8 @@ class Application(object):
 		self.titlebar = Titlebar(self.master)
 		self.modeoptionbar = Modebar(self.master)
 		self.image_executer = Image_executer(self.master)
+		self.bt = Button(self.master,command=self.Transform,text='gray scale')
+		self.bt.grid(row=2,column=0)
 
 	def Run(self):
 		window_height = Application.HEIGHT
@@ -29,6 +33,11 @@ class Application(object):
 
 	def Close(self):
 		self.master.quit()
+
+	def Transform(self):
+		t = Algorithm()
+		img = t.Color_space_convert(img=self.image_executer.pq[self.image_executer.it][0], src_cs = 'RGB', dst_cs = 'GRAY')
+		self.image_executer.Transform(self.image_executer.pq[self.image_executer.it][0],img,'Gray scale')
 
 
 root = Tk()
