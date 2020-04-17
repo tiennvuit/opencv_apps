@@ -1,6 +1,18 @@
+r"""Date: 12/3/2020
+    Author: Nguyen Quoc Cuong
+"""
 from tkinter import *
 
 class Component(Frame):
+	r"""A generic Commponent class derived from tkinter.Frame to contain widget
+
+	    Args:
+	        the_window(tkinter.Tk): reference to the window
+	        relief('flat','sunken','raised','groove','ridge'): border decoration
+	        bg(str): background color
+	        width(int): width
+	        height(int): height
+	""" 
 	def __init__(self,the_window,relief='raised',bg='SystemButtonFace',width=0,height=0):
 		super().__init__()
 		self["relief"] = relief

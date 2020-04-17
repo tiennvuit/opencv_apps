@@ -1,3 +1,6 @@
+r"""Date: 12/3/2020
+    Author: Nguyen Quoc Cuong
+"""
 from tkinter import * 
 import os.path as osp
 from PIL import ImageTk,Image
@@ -8,6 +11,12 @@ import os.path
 
 
 class Image_executer(Component):
+	r"""A Titlebar class for image executor area 
+
+    Args:
+        master(tkinter.Tk): reference to the window
+    """
+
 	IMAGE_PATH = 'image/icon-image-512.png'
 	PREVIOUS_PATH = 'image/previos_arrow.png'
 	NEXT_PATH = 'image/next_arrow.jpg'
@@ -65,19 +74,38 @@ class Image_executer(Component):
 		self.grid(row=2,column=1,columnspan=2,sticky=W)
 
 	def Change_image(self,image):
+		r"""
+            Args:
+                image(numpy array): image to display next
+            Display another image in the image executor area
+        """
 		image = Image.fromarray(image)
+		#convert to image object
 		self.image = ImageTk.PhotoImage(image.resize(Image_executer.IMAGE_SIZE,Image.ANTIALIAS))
+		#resize and convert to ImageTk which can be displayed
 		self.display.delete("IMG")
+		#remove the old image
 		self.display.create_image(0, 0, image=self.image, anchor=NW, tags="IMG")
 
 	def Add_to_queue(self,element):
+		r"""
+            Args:
+                element(tuple): (image,False) if this image element is loaded or captured
+                				(image,True,original_image,effect) if this image is tranformed from original image by effect
+            Return image array after being converted
+            Example:
+        """
 		self.pq.append(element)
 		if len(self.pq) > Image_executer.MAX_ELEMENT:
 			del self.pq[0]
+		#delete the first element of the queue if its length grows over limit
 		self.it = len(self.pq)-1
 		self.Reset_state()
 
 	def Load(self):
+		r"""
+            Load an image from local directory 
+        """
 		self.path = filedialog.askopenfilename(initialdir = os.path.dirname(os.path.abspath(__file__)),title = "Select file",
 			                                    filetypes = (("jpeg files","*.jpg"),("all files","*.*")))
 		if len(self.path) == 0:
@@ -92,6 +120,9 @@ class Image_executer(Component):
 		self.Reset_state()
 
 	def Return_back(self):
+		r"""
+            Display previos image in the queue 
+        """
 		if self.it == 0:
 			self.it = len(self.pq)-1
 		else:
@@ -100,6 +131,9 @@ class Image_executer(Component):
 		self.Reset_state()
 
 	def Come_next(self):
+		r"""
+            Display next image in the queue
+        """
 		if self.it == len(self.pq)-1:
 			self.it = 0
 		else:
@@ -108,6 +142,9 @@ class Image_executer(Component):
 		self.Reset_state()
 
 	def Reset_state(self):
+		r"""
+            Reset state of the button
+        """
 		if len(self.pq) >= 2:
 			self.firstbutton.configure(state='normal')
 			self.secondbutton.configure(state='normal')
@@ -126,6 +163,9 @@ class Image_executer(Component):
 			self.sixthbutton.configure(state='disabled')
 
 	def Capture(self):
+		r"""
+            Capture an image and display
+        """
 		cam = cv.VideoCapture(0, cv.CAP_DSHOW)
 		cv.namedWindow('Capturing')
 		while True:
@@ -137,15 +177,20 @@ class Image_executer(Component):
 			if key%256 ==27:
 				print("Escape hit, closing...")
 				break
+			#Escape if hit Esc 
 			elif key%256 == 32:
 				frame = cv.cvtColor(frame,cv.COLOR_BGR2RGB)
 				self.Change_image(frame)
 				self.Add_to_queue((frame,False))
 				break
+			#Capture if hit Space
 		cam.release()
 		cv.destroyAllWindows()
 
 	def Remove_from_queue(self):
+		r"""
+            Delete an element from the queue
+        """
 		del self.pq[self.it]
 		if len(self.pq)==0:
 			self.it = -1
@@ -159,6 +204,9 @@ class Image_executer(Component):
 			self.Reset_state()
 
 	def Visualize(self):
+		r"""
+            Visualize image and its original image
+        """
 		self.showing_windows = Toplevel()
 		self.display_img1 = ImageTk.PhotoImage(Image.fromarray(self.pq[self.it][0]).resize(Image_executer.IMAGE_SIZE,Image.ANTIALIAS))
 		self.display_img2 = ImageTk.PhotoImage(Image.fromarray(self.pq[self.it][2]).resize(Image_executer.IMAGE_SIZE,Image.ANTIALIAS))
