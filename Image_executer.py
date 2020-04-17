@@ -34,6 +34,7 @@ class Image_executer(Component):
 		super(Image_executer, self).__init__(master,height=Image_executer.HEIGHT,width=Image_executer.WIDTH,bg =Image_executer.BG)
 		self.it = -1
 		self.pq = []
+		self.is_enabled = True
 		self.firstbutton_img = ImageTk.PhotoImage(Image.open(osp.join(osp.dirname(osp.abspath(__file__)),
 			Image_executer.PREVIOUS_PATH)))
 		self.firstbutton = Button(self,image=self.firstbutton_img,state='disabled',command=self.Return_back)
@@ -50,12 +51,12 @@ class Image_executer(Component):
 		self.secondbutton = Button(self,image=self.secondbutton_img,state='disabled',command=self.Come_next)
 		self.secondbutton.grid(row=0,column = 2,pady=Image_executer.BUTTON_PADY,sticky=N)
 
-		self.optionframe = Frame(self,bg = Image_executer.BG)
+		self.optionframe = Component(self,bg = Image_executer.BG)
 
 		self.seventhbutton_img = ImageTk.PhotoImage(Image.open(osp.join(osp.dirname(osp.abspath(__file__)),
 			Image_executer.SETTING_PATH)))
-		self.seventhbutton = Button(self.optionframe,image=self.seventhbutton_img)
-		self.seventhbutton.grid(row=0,column=0,padx=Image_executer.PADX,sticky=N)
+		self.seventhbutton = Button(self,image=self.seventhbutton_img,command=self.Switch)
+		self.seventhbutton.grid(row=1,column=0,padx=Image_executer.PADX,sticky=N)
 
 		self.thirdbutton = Button(self.optionframe,text='Load an image',width=15,command=self.Load)
 		self.thirdbutton.grid(row=0,column = 1,padx=Image_executer.PADX)
@@ -69,9 +70,21 @@ class Image_executer(Component):
 		self.sixthbutton = Button(self.optionframe,text='Visualize',width=15,state='disabled',command=self.Visualize)
 		self.sixthbutton.grid(row=0,column = 4,padx=Image_executer.PADX)
 
-		self.optionframe.grid(row=1,column=0,columnspan=3)
+		self.optionframe.grid(row=1,column=1,columnspan=2,sticky=W)
+		self.empty_frame = Component(self,bg = Image_executer.BG,width=500,height=40)
+		self.empty_frame.grid(row=1,column=1,columnspan=2,sticky=W)
+		self.empty_frame.Disable()
 
 		self.grid(row=2,column=1,columnspan=2,sticky=W)
+
+	def Switch(self):
+		if self.is_enabled==True:
+			self.empty_frame.Enable()
+			self.is_enabled=False
+		else:
+			self.optionframe.Enable()
+			self.Reset_state()
+			self.is_enabled=True
 
 	def Change_image(self,image):
 		r"""

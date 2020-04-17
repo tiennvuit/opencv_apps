@@ -35,6 +35,7 @@ class Titlebar(Component):
 	def __init__(self,master):
 		super(Titlebar, self).__init__(master,Titlebar.TITLEBAR_RELIEF,Titlebar.TITLEBAR_BG)
 		self.master.overrideredirect(True)
+		#ignore the standard ui of tkinter
 
 		self.icon_img = ImageTk.PhotoImage( Image.open(os.path.join(os.path.dirname(os.path.abspath(__file__)),Titlebar.ICON_PATH)))
 		self.icon = Label(self,image=self.icon_img,height=Titlebar.ICON_HEIGHT,width=Titlebar.ICON_WIDTH)

@@ -14,7 +14,7 @@ class Component(Frame):
 	        height(int): height
 	""" 
 	def __init__(self,the_window,relief='raised',bg='SystemButtonFace',width=0,height=0):
-		super().__init__()
+		super().__init__(the_window)
 		self["relief"] = relief
 		self["bg"] = bg
 		self["width"] = width

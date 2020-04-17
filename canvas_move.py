@@ -6,7 +6,7 @@ class GFG:
         self.master = master 
           
         # to take care movement in x direction 
-        self.x = 1
+        self.x = -5
         # to take care movement in y direction 
         self.y = 0
   
@@ -16,6 +16,7 @@ class GFG:
         self.rectangle = self.canvas.create_rectangle( 
                          5, 5, 25, 25, fill = "black") 
         self.canvas.pack() 
+        self.canvas.move(self.rectangle, self.x, self.y)
   
         # calling class's movement method to  
         # move the rectangle 
